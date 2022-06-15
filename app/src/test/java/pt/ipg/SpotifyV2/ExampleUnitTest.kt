@@ -1,4 +1,4 @@
-package pt.ipg.livros
+package pt.ipg.SpotifyV2
 
 import org.junit.Test
 

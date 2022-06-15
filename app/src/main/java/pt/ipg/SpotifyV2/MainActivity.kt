@@ -1,4 +1,4 @@
-package pt.ipg.livros
+package pt.ipg.SpotifyV2
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -9,7 +9,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import pt.ipg.livros.databinding.ActivityMainBinding
+import pt.ipg.SpotifyV2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
