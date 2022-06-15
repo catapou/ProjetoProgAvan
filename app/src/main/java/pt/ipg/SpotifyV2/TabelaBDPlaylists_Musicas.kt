@@ -9,7 +9,7 @@ class TabelaBDPlaylists_Musicas(db: SQLiteDatabase) : TabelaBD(db, NOME) {
     }
 
     companion object {
-        const val NOME = "categorias"
+        const val NOME = "PlayLists_Musicas"
         const val CAMPO_NOME = "nome"
 
         val TODAS_COLUNAS = arrayOf(BaseColumns._ID, CAMPO_NOME)
