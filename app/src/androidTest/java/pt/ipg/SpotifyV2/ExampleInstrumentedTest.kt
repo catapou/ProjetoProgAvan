@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("pt.ipg.livros", appContext.packageName)
+        assertEquals("pt.ipg.SpotifyV2", appContext.packageName)
     }
 }
