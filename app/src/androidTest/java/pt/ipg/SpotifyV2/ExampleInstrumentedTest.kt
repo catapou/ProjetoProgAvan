@@ -26,9 +26,72 @@ class ExampleInstrumentedTest {
         return openHelper.writableDatabase
     }
 
+    private fun insereAutor(db: SQLiteDatabase, autor: Autor) {
+        autor.id = TabelaBDAutor(db).insert(autor.toContentValues())
+
+        assertNotEquals(-1, autor.id)
+    }
+
+
     @Before
     fun apagaBaseDados() {
         appContext().deleteDatabase(BDSpotifyV2OpenHelper.NOME)
+    }
+
+    @Test
+    fun consegueAbrirBaseDados() {
+        val openHelper = BDSpotifyV2OpenHelper(appContext())
+        val db = openHelper.readableDatabase
+
+        assertTrue(db.isOpen)
+
+        db.close()
+    }
+
+    @Test
+    fun consegueInserirAutor() {
+        val db = getWritableDatabase()
+
+        val autor = Autor("Couves", "olá")
+        insereAutor(db, autor)
+
+        db.close()
+    }
+
+    @Test
+    fun consegueAlterarAutor() {
+        val db = getWritableDatabase()
+
+        val autor = Autor("TESTE", "adeus")
+        insereAutor(db, autor)
+
+        autor.Autor_name = "Ficção científica"
+        val registosAlterados = TabelaBDAutor(db).update(
+            autor.toContentValues(),
+            "${TabelaBDAutor.CAMPO_ID}=?",
+            arrayOf("${autor.id}")
+        )
+
+        assertEquals(1, registosAlterados)
+
+        db.close()
+    }
+
+    @Test
+    fun consegueEliminarAutor() {
+        val db = getWritableDatabase()
+
+        val Autor = Autor("TESTE", "adeus")
+        insereAutor(db, Autor)
+
+        val registosEliminados = TabelaBDAutor(db).delete(
+            "${TabelaBDAutor.CAMPO_ID}=?",
+            arrayOf("${Autor.id}")
+        )
+
+        assertEquals(1, registosEliminados)
+
+        db.close()
     }
 
 }
