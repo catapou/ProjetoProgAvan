@@ -44,6 +44,12 @@ class ExampleInstrumentedTest {
         assertNotEquals(-1, playlists.id)
     }
 
+    private fun inserePlaylists_Musicas(db: SQLiteDatabase, playlists_Musicas: Playlists_Musicas) {
+        playlists_Musicas.id = TabelaBDAutor(db).insert(playlists_Musicas.toContentValues())
+
+        assertNotEquals(-1, playlists_Musicas.id)
+    }
+
 
     @Before
     fun apagaBaseDados() {
@@ -86,6 +92,17 @@ class ExampleInstrumentedTest {
 
         val playlists = PlayLists("Couves", 20001005, 30340, 100, "TOP 100 HITs", 1)
         inserePlaylists(db, playlists)
+
+        db.close()
+    }
+
+
+    @Test
+    fun consegueInserirPlaylists_Musicas() {
+        val db = getWritableDatabase()
+
+        val playlists_Musicas = Playlists_Musicas(1, 1)
+        inserePlaylists_Musicas(db, playlists_Musicas)
 
         db.close()
     }
@@ -150,6 +167,26 @@ class ExampleInstrumentedTest {
 
 
     @Test
+    fun consegueAlterarPlaylists_Musicas() {
+        val db = getWritableDatabase()
+
+        val playlists_Musicas = Playlists_Musicas(2, 2)
+        inserePlaylists_Musicas(db, playlists_Musicas)
+
+        playlists_Musicas.Musicas_id = 1
+        val registosAlterados = TabelaBDMusicas(db).update(
+            playlists_Musicas.toContentValues(),
+            "${TabelaBDMusicas.CAMPO_ID}=?",
+            arrayOf("${playlists_Musicas.id}")
+        )
+
+        assertEquals(1, registosAlterados)
+
+        db.close()
+    }
+
+
+    @Test
     fun consegueEliminarAutor() {
         val db = getWritableDatabase()
 
@@ -194,6 +231,23 @@ class ExampleInstrumentedTest {
         val registosEliminados = TabelaBDPlaylists(db).delete(
             "${TabelaBDPlaylists.CAMPO_ID}=?",
             arrayOf("${playlists.id}")
+        )
+
+        assertEquals(1, registosEliminados)
+
+        db.close()
+    }
+
+    @Test
+    fun consegueEliminarPlaylists_Musicas() {
+        val db = getWritableDatabase()
+
+        val playlists_Musicas = Playlists_Musicas(2, 2)
+        inserePlaylists_Musicas(db, playlists_Musicas)
+
+        val registosEliminados = TabelaBDPlaylists_Musicas(db).delete(
+            "${TabelaBDPlaylists_Musicas.CAMPO_ID}=?",
+            arrayOf("${playlists_Musicas.id}")
         )
 
         assertEquals(1, registosEliminados)
