@@ -16,7 +16,7 @@ class TabelaBDMusicas(db: SQLiteDatabase) : TabelaBD(db, NOME) {
         const val DURACAO = "duração"
         const val NOME_DE_MUSICA = "nome_de_musica"
         const val DATA_DE_LANCAMENTO = "data_de_lançamento"
-        const val CAMPO_ID = "${TabelaBDAutor.NOME}.${BaseColumns._ID}"
+        const val CAMPO_ID = "$NOME.${BaseColumns._ID}"
 
         val TODAS_COLUNAS = arrayOf(BaseColumns._ID, CAMPO_NOME, NOME_ALBUM, DURACAO, NOME_DE_MUSICA, DATA_DE_LANCAMENTO)
     }
