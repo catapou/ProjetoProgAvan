@@ -17,6 +17,7 @@ class TabelaBDPlaylists(db: SQLiteDatabase) : TabelaBD(db, NOME) {
         const val DURACAO_DE_PLAYLIST = "duração_de_playlist"
         const val NUMERO_DE_MUSICAS = "numero_de_musicas"
         const val DESCRICAO = "descrição"
+        const val CAMPO_ID = "${TabelaBDAutor.NOME}.${BaseColumns._ID}"
 
         val TODAS_COLUNAS = arrayOf(BaseColumns._ID, CAMPO_NOME, DATA_DA_CRIACAO, DURACAO_DE_PLAYLIST, NUMERO_DE_MUSICAS, DESCRICAO)
     }
